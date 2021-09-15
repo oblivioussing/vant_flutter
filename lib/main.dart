@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package/button/button.dart';
+
 void main() {
   runApp(Home());
 }
@@ -38,37 +40,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _cellBtn(String label) {
-    return TextButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
-          Color(0xFFf7f8fa),
-        ),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-        ),
-      ),
-      child: Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          // color: Color(0xFFf7f8fa),
-          borderRadius: BorderRadius.all(
-            Radius.circular(45),
-          ),
-        ),
-        height: 45,
-        padding: EdgeInsets.only(right: 30, left: 30),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-          ),
-        ),
-      ),
-      onPressed: () {},
+  Widget _cellBtn(String text) {
+    return ChantButton(
+      text: text,
+      onPressed: () {
+        print(text);
+      },
     );
   }
 }
