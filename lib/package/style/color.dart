@@ -18,15 +18,15 @@ class ChantColor {
   static const orangeLight = Color(0xFFfffbe8);
   static const green = Color(0xFF07c160);
 
-  static const primaryColor = blue;
-  static const successColor = green;
-  static const dangerColor = red;
-  static const warningColor = orange;
-  static const textColor = gray8;
-  static const activeColor = gray2;
+  static const primary = blue;
+  static const success = green;
+  static const danger = red;
+  static const warning = orange;
+  static const text = gray8;
+  static const active = gray2;
   static const activeOpacity = 0.7;
   static const disabledOpacity = 0.5;
-  static const backgroundColor = gray1;
-  static const backgroundColorLight = Color(0xFFfafafa);
-  static const textLinkColor = Color(0xFF576b95);
+  static const background = gray1;
+  static const backgroundLight = Color(0xFFfafafa);
+  static const textLink = Color(0xFF576b95);
 }
