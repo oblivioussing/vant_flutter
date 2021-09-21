@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vant_flutter/demo/button.dart';
+import 'package:vant_flutter/demo/loading.dart';
 import 'package:vant_flutter/package/button/button.dart';
 import 'package:vant_flutter/package/style/color.dart';
 
@@ -41,12 +42,18 @@ class _HomeState extends State<Home> {
 
   Widget _menu() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _title('基础组件'),
         _cellBtn('Button按钮', () {
           _router('button');
         }),
         _cellBtn('Cell单元格', () {
           _router('cell');
+        }),
+        _title('反馈组件'),
+        _cellBtn('Loading加载', () {
+          _router('loading');
         }),
       ],
     );
@@ -57,11 +64,28 @@ class _HomeState extends State<Home> {
       padding: EdgeInsets.only(top: 10),
       child: ChantButton(
         alignment: Alignment.centerLeft,
-        color: ChantColor.gray1,
+        backgroundColor: ChantColor.gray1,
         padding: EdgeInsets.only(left: 25),
         round: true,
         text: text,
+        width: double.infinity,
         onPressed: onPressed,
+      ),
+    );
+  }
+
+  Widget _title(text) {
+    return Container(
+      padding: EdgeInsets.only(
+        top: 15,
+        left: 20,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 16,
+          color: ChantColor.gray6,
+        ),
       ),
     );
   }
@@ -69,6 +93,7 @@ class _HomeState extends State<Home> {
   _router(String path) {
     var map = {
       'button': ButtonDemo(),
+      'loading': LoadingDemo(),
     };
     var wdt = map[path] ?? Container();
     Navigator.push(

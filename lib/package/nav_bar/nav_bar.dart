@@ -4,9 +4,11 @@ import 'package:vant_flutter/package/style/color.dart';
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
   NavBar({
     required this.title,
+    this.showMore = false,
   });
 
   final String title;
+  final bool showMore;
 
   @override
   final Size preferredSize = Size.fromHeight(46);
@@ -16,33 +18,57 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       centerTitle: true,
-      leading: _backBtn(context),
+      leading: _backButtn(context),
       title: _title(),
+      actions: [
+        _more(context),
+      ],
     );
   }
 
-  // 返回按钮
-  Widget _backBtn(context) {
+  Widget _iconButton(
+    context, {
+    required onPressed,
+    required image,
+  }) {
     return IconButton(
-      onPressed: () {
-        Navigator.maybePop(context);
-      },
+      onPressed: onPressed,
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       icon: Image.asset(
-        'image/ic_back.png',
+        image,
         width: 20,
       ),
     );
   }
 
-  // title
+  Widget _backButtn(context) {
+    return _iconButton(
+      context,
+      onPressed: () {
+        Navigator.maybePop(context);
+      },
+      image: 'image/ic_back.png',
+    );
+  }
+
   Widget _title() {
     return Text(
       title,
       style: TextStyle(
         color: ChantColor.black,
       ),
+    );
+  }
+
+  Widget _more(context) {
+    if (!showMore) {
+      return SizedBox.shrink();
+    }
+    return _iconButton(
+      context,
+      onPressed: () {},
+      image: 'image/ic_more.png',
     );
   }
 }

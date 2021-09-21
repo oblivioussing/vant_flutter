@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vant_flutter/package/style/color.dart';
 import 'package:vant_flutter/package/style/size.dart';
 
-class ChantButton extends StatelessWidget {
+class ChantButton extends StatefulWidget {
   ChantButton({
     required this.text,
     required this.onPressed,
@@ -13,7 +13,7 @@ class ChantButton extends StatelessWidget {
     this.width = ChantButtonSize.normalWidth,
     this.alignment = Alignment.center,
     this.borderRadius = ChantBorderSize.borderRadiusSm,
-    this.color = ChantColor.white,
+    this.backgroundColor = ChantColor.white,
     this.fontColor = ChantColor.black,
     this.fontSize = ChantFontSize.md,
     this.icon,
@@ -36,7 +36,7 @@ class ChantButton extends StatelessWidget {
   final double width; // 宽度
   final Alignment alignment; // 对齐方式
   final double borderRadius; // 圆角
-  final Color color; // 按钮颜色
+  final Color backgroundColor; // 按钮颜色
   final Color fontColor; // 文字颜色
   final double? fontSize; // 文字大小
   final Image? icon; // 左侧图标
@@ -51,81 +51,114 @@ class ChantButton extends StatelessWidget {
   final double loadingSize; // 加载图标大小
 
   @override
+  _ChantButtonState createState() => _ChantButtonState();
+}
+
+class _ChantButtonState extends State<ChantButton> {
+  late Color backgroundColor; // 按钮颜色
+  late double borderRadius; // 圆角
+  late Color fontColor; // 文字颜色
+  late BorderSide borderSide; // 边框
+
+  @override
   Widget build(BuildContext context) {
+    backgroundColor = widget.backgroundColor;
+    borderRadius = widget.borderRadius;
+    fontColor = widget.fontColor;
+    borderSide = BorderSide.none;
+    // 初始化
+    _init();
+
     return TextButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return themeColor().withOpacity(
+          var pressed = states.contains(MaterialState.pressed);
+          // 点击
+          if (pressed && widget.disabled == false) {
+            // 背景为白色
+            if (backgroundColor == ChantColor.white) {
+              return ChantColor.gray5.withOpacity(
+                ChantColor.activeOpacity,
+              );
+            }
+            return backgroundColor.withOpacity(
               ChantColor.activeOpacity,
             );
           }
-          return themeColor();
+          // 禁用
+          if (widget.disabled == true) {
+            return backgroundColor.withAlpha(400);
+          }
+          return backgroundColor;
         }),
         overlayColor: MaterialStateProperty.all(Colors.transparent),
         padding: MaterialStateProperty.all(
-          padding ?? EdgeInsets.all(0),
+          widget.padding ?? EdgeInsets.all(0),
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-              themeBorderRadius(),
+              borderRadius,
             ),
           ),
         ),
-        side: MaterialStateProperty.all(
-          BorderSide(color: ChantColor.gray3, width: 1),
-        ),
+        side: MaterialStateProperty.all(borderSide),
       ),
       child: Container(
-        alignment: alignment,
-        height: height,
+        alignment: widget.alignment,
+        height: widget.height,
+        padding: EdgeInsets.all(0),
+        width: widget.width,
         child: Text(
-          text,
+          widget.text,
           style: TextStyle(
-            color: themeFontColor(),
-            fontSize: fontSize,
+            color: fontColor,
+            fontSize: widget.fontSize,
           ),
         ),
       ),
-      onPressed: onPressed,
+      onPressed: widget.disabled ? null : widget.onPressed,
     );
   }
 
-  // 按钮颜色
-  Color themeColor() {
-    if (type == ButtonType.primary) {
-      return ChantColor.primary;
+  // 初始化
+  _init() {
+    var colorMap = {
+      ButtonType.normal: ChantColor.white,
+      ButtonType.success: ChantColor.success,
+      ButtonType.warning: ChantColor.warning,
+      ButtonType.danger: ChantColor.danger,
+      ButtonType.primary: ChantColor.primary,
+    };
+    // 颜色
+    var color = colorMap[widget.type] as Color;
+    // 背景颜色
+    if (widget.type == ButtonType.normal) {
+      backgroundColor = widget.backgroundColor;
+    } else {
+      // 背景颜色
+      backgroundColor = color;
     }
-    if (type == ButtonType.success) {
-      return ChantColor.success;
+    // 普通按钮
+    if (widget.type == ButtonType.normal) {
+      borderSide = BorderSide(color: ChantColor.gray3, width: 0.5);
+    } else {
+      fontColor = ChantColor.white;
     }
-    if (type == ButtonType.warning) {
-      return ChantColor.warning;
+    // 朴素按钮
+    if (widget.plain) {
+      borderSide = BorderSide(color: color, width: 0.5);
+      backgroundColor = ChantColor.white;
+      fontColor = color;
     }
-    if (type == ButtonType.danger) {
-      return ChantColor.danger;
+    // 圆角
+    if (widget.round) {
+      borderRadius = ChantBorderSize.borderRadiusMax;
     }
-    return color;
-  }
-
-  // 圆角
-  double themeBorderRadius() {
-    if (round) {
-      return ChantBorderSize.borderRadiusMax;
+    // 方形按钮
+    if (widget.square) {
+      borderRadius = 0;
     }
-    if (square) {
-      return 0;
-    }
-    return borderRadius;
-  }
-
-  // 字体颜色
-  Color themeFontColor() {
-    if (type == ButtonType.normal) {
-      return fontColor;
-    }
-    return ChantColor.white;
   }
 }
 
