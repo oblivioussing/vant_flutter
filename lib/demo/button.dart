@@ -23,16 +23,25 @@ class _ButtonDemoState extends State<ButtonDemo> {
           children: [
             _title('按钮类型'),
             _type(),
-            _title('朴素类型'),
+            _title('朴素按钮'),
             _plain(),
-            _title('禁用按钮'),
+            _title('禁用状态'),
             _disabled(),
+            _title('加载状态'),
+            _loading(),
+            _title('按钮形状'),
+            _shape(),
+            _title('按钮尺寸'),
+            _size(),
+            _title('自定义颜色'),
+            _customColor(),
           ],
         ),
       ),
     );
   }
 
+  // 按钮类型
   Widget _type() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,6 +80,7 @@ class _ButtonDemoState extends State<ButtonDemo> {
     );
   }
 
+  // 朴素按钮
   Widget _plain() {
     return Row(
       children: [
@@ -91,6 +101,7 @@ class _ButtonDemoState extends State<ButtonDemo> {
     );
   }
 
+  // 禁用状态
   Widget _disabled() {
     return Row(
       children: [
@@ -110,6 +121,98 @@ class _ButtonDemoState extends State<ButtonDemo> {
           onPressed: () {
             print('disabled');
           },
+        ),
+      ],
+    );
+  }
+
+  // 加载状态
+  Widget _loading() {
+    return Row(
+      children: [],
+    );
+  }
+
+  // 按钮形状
+  Widget _shape() {
+    return Row(
+      children: [
+        ChantButton(
+          text: '方形按钮',
+          type: ButtonType.primary,
+          square: true,
+          onPressed: () {},
+        ),
+        SizedBox(width: 13),
+        ChantButton(
+          text: '圆形按钮',
+          type: ButtonType.success,
+          round: true,
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
+  // 按钮尺寸
+  Widget _size() {
+    return Column(
+      children: [
+        ChantButton(
+          text: '大号尺寸',
+          type: ButtonType.primary,
+          size: ButtonSize.large,
+          onPressed: () {},
+        ),
+        Row(
+          children: [
+            ChantButton(
+              text: '普通按钮',
+              type: ButtonType.primary,
+              onPressed: () {},
+            ),
+            SizedBox(width: 13),
+            ChantButton(
+              text: '小型按钮',
+              type: ButtonType.primary,
+              size: ButtonSize.small,
+              onPressed: () {},
+            ),
+            SizedBox(width: 13),
+            ChantButton(
+              text: '迷你按钮',
+              type: ButtonType.primary,
+              size: ButtonSize.mini,
+              onPressed: () {},
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  // 自定义颜色
+  Widget _customColor() {
+    return Row(
+      children: [
+        ChantButton(
+          backgroundColor: Color.fromRGBO(114, 50, 221, 1),
+          text: '单色按钮',
+          onPressed: () {},
+        ),
+        SizedBox(width: 13),
+        ChantButton(
+          backgroundColor: Color.fromRGBO(114, 50, 221, 1),
+          plain: true,
+          text: '单色按钮',
+          onPressed: () {},
+        ),
+        SizedBox(width: 13),
+        ChantButton(
+          backgroundColor: Color.fromRGBO(114, 50, 221, 1),
+          round: true,
+          text: '渐变按钮',
+          onPressed: () {},
         ),
       ],
     );
