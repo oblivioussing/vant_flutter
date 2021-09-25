@@ -37,6 +37,8 @@ class _ButtonDemoState extends State<ButtonDemo> {
             _loading(),
             _title('按钮形状'),
             _shape(),
+            _title('图标按钮'),
+            _icon(),
             _title('按钮尺寸'),
             _size(),
             _title('自定义颜色'),
@@ -167,6 +169,13 @@ class _ButtonDemoState extends State<ButtonDemo> {
           onPressed: () {},
         ),
       ],
+    );
+  }
+
+  // 图标按钮
+  Widget _icon() {
+    return Row(
+      children: [],
     );
   }
 

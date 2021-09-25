@@ -7,6 +7,7 @@ class ChantButton extends StatefulWidget {
   ChantButton({
     required this.text,
     required this.onPressed,
+    this.onLongPress,
     this.type = ButtonType.normal,
     this.size = ButtonSize.normal,
     this.height = ChantButtonSize.normalHeight,
@@ -31,6 +32,7 @@ class ChantButton extends StatefulWidget {
 
   final String text; // 按钮文字
   final VoidCallback onPressed; // 点击回调
+  final VoidCallback? onLongPress; // 长按回调
   final ButtonType type; // 类型
   final ButtonSize size; // 尺寸
   final double height; // 高度
@@ -62,8 +64,9 @@ class _ChantButtonState extends State<ChantButton> {
   late Color fontColor; // 文字颜色
   late double fontSize; // 文字大小
   late BorderSide borderSide; // 边框
-  late double height; // 高度
-  late double width; // 宽度
+  late double? height; // 高度
+  late double? width; // 宽度
+  bool active = false; // 是否处于点击状态
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +109,13 @@ class _ChantButtonState extends State<ChantButton> {
             }
             return backgroundColor;
           }),
+          foregroundColor: MaterialStateProperty.resolveWith((states) {
+            var pressed = states.contains(MaterialState.pressed);
+            if (pressed) {
+              return fontColor.withOpacity(ChantColor.activeOpacity);
+            }
+            return fontColor;
+          }),
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           padding: MaterialStateProperty.all(
             widget.padding ?? EdgeInsets.all(0),
@@ -118,20 +128,22 @@ class _ChantButtonState extends State<ChantButton> {
             ),
           ),
           side: MaterialStateProperty.all(borderSide),
-          visualDensity: VisualDensity.compact,
+          visualDensity: VisualDensity(
+            horizontal: VisualDensity.minimumDensity,
+            vertical: VisualDensity.minimumDensity,
+          ),
         ),
         child: Container(
           alignment: widget.alignment,
-          padding: EdgeInsets.all(0),
           child: Text(
             widget.text,
             style: TextStyle(
-              color: fontColor,
               fontSize: fontSize,
             ),
           ),
         ),
         onPressed: widget.disabled ? null : widget.onPressed,
+        onLongPress: widget.disabled ? null : widget.onLongPress,
       ),
     );
   }
@@ -168,6 +180,8 @@ class _ChantButtonState extends State<ChantButton> {
     // 文字按钮
     if (widget.type == ButtonType.text) {
       fontColor = ChantColor.black;
+      height = null;
+      width = null;
     }
     // 朴素按钮
     if (widget.plain) {
