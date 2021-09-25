@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vant_flutter/package/button/button.dart';
 
@@ -16,8 +17,13 @@ class _ButtonDemoState extends State<ButtonDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NavBar(title: 'Button'),
-      body: Padding(
-        padding: EdgeInsets.all(10),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          top: 10,
+          right: 10,
+          bottom: 30,
+          left: 10,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -71,10 +77,20 @@ class _ButtonDemoState extends State<ButtonDemo> {
           ],
         ),
         SizedBox(height: 7),
-        ChantButton(
-          text: '警告按钮',
-          type: ButtonType.warning,
-          onPressed: () {},
+        Row(
+          children: [
+            ChantButton(
+              text: '警告按钮',
+              type: ButtonType.warning,
+              onPressed: () {},
+            ),
+            SizedBox(width: 13),
+            ChantButton(
+              text: '文字按钮',
+              type: ButtonType.text,
+              onPressed: () {},
+            ),
+          ],
         ),
       ],
     );
@@ -164,6 +180,7 @@ class _ButtonDemoState extends State<ButtonDemo> {
           size: ButtonSize.large,
           onPressed: () {},
         ),
+        SizedBox(height: 7),
         Row(
           children: [
             ChantButton(
@@ -202,7 +219,7 @@ class _ButtonDemoState extends State<ButtonDemo> {
         ),
         SizedBox(width: 13),
         ChantButton(
-          backgroundColor: Color.fromRGBO(114, 50, 221, 1),
+          color: Color.fromRGBO(114, 50, 221, 1),
           plain: true,
           text: '单色按钮',
           onPressed: () {},
@@ -223,7 +240,9 @@ class _ButtonDemoState extends State<ButtonDemo> {
       padding: EdgeInsets.only(top: 15, bottom: 15),
       child: Text(
         text,
-        style: TextStyle(color: ChantColor.gray7),
+        style: TextStyle(
+          color: ChantColor.gray7,
+        ),
       ),
     );
   }

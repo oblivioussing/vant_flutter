@@ -32,7 +32,13 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(30),
+        color: ChantColor.white,
+        padding: EdgeInsets.only(
+          top: 30,
+          right: 15,
+          bottom: 30,
+          left: 15,
+        ),
         child: SingleChildScrollView(
           child: _menu(),
         ),
@@ -65,6 +71,7 @@ class _HomeState extends State<Home> {
       child: ChantButton(
         alignment: Alignment.centerLeft,
         backgroundColor: ChantColor.gray1,
+        fontColor: ChantColor.black,
         padding: EdgeInsets.only(left: 25),
         round: true,
         text: text,
