@@ -15,6 +15,7 @@ class ChantButton extends StatefulWidget {
     this.alignment = Alignment.center,
     this.borderRadius = ChantBorderSize.borderRadiusSm,
     this.backgroundColor = ChantColor.white,
+    this.gradient,
     this.color,
     this.fontColor = ChantColor.white,
     this.fontSize = ChantFontSize.md,
@@ -40,6 +41,7 @@ class ChantButton extends StatefulWidget {
   final Alignment alignment; // 对齐方式
   final double borderRadius; // 圆角
   final Color backgroundColor; // 背景颜色
+  final Gradient? gradient; // 渐变色
   final Color? color; // 按钮颜色
   final Color fontColor; // 文字颜色
   final double fontSize; // 文字大小
@@ -135,6 +137,12 @@ class _ChantButtonState extends State<ChantButton> {
         ),
         child: Container(
           alignment: widget.alignment,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              borderRadius,
+            ),
+            gradient: widget.gradient,
+          ),
           child: Text(
             widget.text,
             style: TextStyle(
@@ -168,7 +176,6 @@ class _ChantButtonState extends State<ChantButton> {
         fontColor = ChantColor.black;
       }
     } else {
-      // 背景颜色
       backgroundColor = color;
     }
     // 普通按钮

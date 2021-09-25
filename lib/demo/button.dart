@@ -236,6 +236,12 @@ class _ButtonDemoState extends State<ButtonDemo> {
         SizedBox(width: 13),
         ChantButton(
           backgroundColor: Color.fromRGBO(114, 50, 221, 1),
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(255, 96, 52, 1),
+              Color.fromRGBO(238, 10, 36, 1),
+            ],
+          ),
           round: true,
           text: '渐变按钮',
           onPressed: () {},
