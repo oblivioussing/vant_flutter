@@ -5,8 +5,8 @@ import 'package:vant_flutter/package/style/size.dart';
 
 class ChantButton extends StatefulWidget {
   ChantButton({
-    required this.text,
     required this.onPressed,
+    this.text = '',
     this.onLongPress,
     this.type = ButtonType.normal,
     this.size = ButtonSize.normal,
@@ -19,7 +19,7 @@ class ChantButton extends StatefulWidget {
     this.color,
     this.fontColor = ChantColor.white,
     this.fontSize = ChantFontSize.md,
-    this.icon,
+    this.icon = '',
     this.padding,
     this.plain = false,
     this.square = false,
@@ -45,7 +45,7 @@ class ChantButton extends StatefulWidget {
   final Color? color; // 按钮颜色
   final Color fontColor; // 文字颜色
   final double fontSize; // 文字大小
-  final Image? icon; // 左侧图标
+  final String icon; // 左侧图标
   final EdgeInsets? padding; // 间距
   final bool plain; // 是否为朴素按钮
   final bool square; // 是否为方形按钮
@@ -68,6 +68,8 @@ class _ChantButtonState extends State<ChantButton> {
   late BorderSide borderSide; // 边框
   late double? height; // 高度
   late double? width; // 宽度
+  double iconHeight = 20; // icon高度
+  double iconWidth = 20; // icon宽度
   bool active = false; // 是否处于点击状态
 
   @override
@@ -86,55 +88,7 @@ class _ChantButtonState extends State<ChantButton> {
       height: height,
       width: width,
       child: TextButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            var pressed = states.contains(MaterialState.pressed);
-            // 点击
-            if (pressed && widget.disabled == false) {
-              // 文字按钮
-              if (widget.type == ButtonType.text) {
-                return Colors.transparent;
-              }
-              // 背景为白色
-              if (backgroundColor == ChantColor.white) {
-                return ChantColor.gray5.withOpacity(
-                  ChantColor.activeOpacity,
-                );
-              }
-              return backgroundColor.withOpacity(
-                ChantColor.activeOpacity,
-              );
-            }
-            // 禁用
-            if (widget.disabled == true) {
-              return backgroundColor.withAlpha(400);
-            }
-            return backgroundColor;
-          }),
-          foregroundColor: MaterialStateProperty.resolveWith((states) {
-            var pressed = states.contains(MaterialState.pressed);
-            if (pressed) {
-              return fontColor.withOpacity(ChantColor.activeOpacity);
-            }
-            return fontColor;
-          }),
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          padding: MaterialStateProperty.all(
-            widget.padding ?? EdgeInsets.all(0),
-          ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                borderRadius,
-              ),
-            ),
-          ),
-          side: MaterialStateProperty.all(borderSide),
-          visualDensity: VisualDensity(
-            horizontal: VisualDensity.minimumDensity,
-            vertical: VisualDensity.minimumDensity,
-          ),
-        ),
+        style: _buttonStyle(),
         child: Container(
           alignment: widget.alignment,
           decoration: BoxDecoration(
@@ -143,12 +97,7 @@ class _ChantButtonState extends State<ChantButton> {
             ),
             gradient: widget.gradient,
           ),
-          child: Text(
-            widget.text,
-            style: TextStyle(
-              fontSize: fontSize,
-            ),
-          ),
+          child: _button(),
         ),
         onPressed: widget.disabled ? null : widget.onPressed,
         onLongPress: widget.disabled ? null : widget.onLongPress,
@@ -225,6 +174,90 @@ class _ChantButtonState extends State<ChantButton> {
       height = ChantButtonSize.largeHeight;
       width = ChantButtonSize.largeWidth;
     }
+    // 纯icon按钮
+    if (widget.text.isEmpty) {
+      width = (height ?? 0) + 10;
+    }
+  }
+
+  // button样式
+  ButtonStyle _buttonStyle() {
+    return ButtonStyle(
+      backgroundColor: MaterialStateProperty.resolveWith((states) {
+        var pressed = states.contains(MaterialState.pressed);
+        // 点击
+        if (pressed && widget.disabled == false) {
+          // 文字按钮
+          if (widget.type == ButtonType.text) {
+            return Colors.transparent;
+          }
+          // 背景为白色
+          if (backgroundColor == ChantColor.white) {
+            return ChantColor.gray5.withOpacity(
+              ChantColor.activeOpacity,
+            );
+          }
+          return backgroundColor.withOpacity(
+            ChantColor.activeOpacity,
+          );
+        }
+        // 禁用
+        if (widget.disabled == true) {
+          return backgroundColor.withOpacity(
+            ChantColor.disabledOpacity,
+          );
+        }
+        return backgroundColor;
+      }),
+      foregroundColor: MaterialStateProperty.resolveWith((states) {
+        var pressed = states.contains(MaterialState.pressed);
+        if (pressed) {
+          return fontColor.withOpacity(ChantColor.activeOpacity);
+        }
+        return fontColor;
+      }),
+      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      padding: MaterialStateProperty.all(
+        widget.padding ?? EdgeInsets.all(0),
+      ),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            borderRadius,
+          ),
+        ),
+      ),
+      side: MaterialStateProperty.all(borderSide),
+      textStyle: MaterialStateProperty.all(
+        TextStyle(fontSize: fontSize),
+      ),
+      visualDensity: VisualDensity(
+        horizontal: VisualDensity.minimumDensity,
+        vertical: VisualDensity.minimumDensity,
+      ),
+    );
+  }
+
+  // button
+  Widget _button() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _icon(),
+        Text(widget.text),
+      ],
+    );
+  }
+
+  Widget _icon() {
+    if (widget.icon.isEmpty) {
+      return SizedBox.shrink();
+    }
+    return Image.asset(
+      widget.icon,
+      height: iconHeight,
+      width: iconHeight,
+    );
   }
 }
 

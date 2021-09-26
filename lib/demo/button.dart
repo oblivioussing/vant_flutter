@@ -55,25 +55,21 @@ class _ButtonDemoState extends State<ButtonDemo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ChantButton(
               text: '主要按钮',
               type: ButtonType.primary,
               onPressed: () {},
             ),
+            SizedBox(width: 13),
             ChantButton(
               text: '成功按钮',
               type: ButtonType.success,
               onPressed: () {},
             ),
+            SizedBox(width: 13),
             ChantButton(
               text: '默认按钮',
-              onPressed: () {},
-            ),
-            ChantButton(
-              text: '危险按钮',
-              type: ButtonType.danger,
               onPressed: () {},
             ),
           ],
@@ -81,6 +77,12 @@ class _ButtonDemoState extends State<ButtonDemo> {
         SizedBox(height: 7),
         Row(
           children: [
+            ChantButton(
+              text: '危险按钮',
+              type: ButtonType.danger,
+              onPressed: () {},
+            ),
+            SizedBox(width: 13),
             ChantButton(
               text: '警告按钮',
               type: ButtonType.warning,
@@ -175,7 +177,20 @@ class _ButtonDemoState extends State<ButtonDemo> {
   // 图标按钮
   Widget _icon() {
     return Row(
-      children: [],
+      children: [
+        ChantButton(
+          icon: 'image/ic_add_white.png',
+          type: ButtonType.primary,
+          onPressed: () {},
+        ),
+        SizedBox(width: 13),
+        ChantButton(
+          text: '按钮',
+          icon: 'image/ic_add_white.png',
+          type: ButtonType.primary,
+          onPressed: () {},
+        ),
+      ],
     );
   }
 
