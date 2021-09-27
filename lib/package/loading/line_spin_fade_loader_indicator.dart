@@ -1,13 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:vant_flutter/package/style/color.dart';
 
 import './infinite_progress.dart';
-
-///
-/// author: Vans Z
-/// date: 2019-06-02
-///
 
 class LineSpinFadeLoaderIndicator extends StatefulWidget {
   LineSpinFadeLoaderIndicator({
@@ -18,7 +13,7 @@ class LineSpinFadeLoaderIndicator extends StatefulWidget {
     this.maxLineHeight: 9.6,
     this.minBallAlpha: 77,
     this.maxBallAlpha: 255,
-    this.ballColor: Colors.red,
+    this.ballColor: ChantColor.gray5,
     this.duration: const Duration(milliseconds: 500),
   });
 
@@ -121,22 +116,32 @@ class _LineSpinFadeLoaderIndicatorPainter extends CustomPainter {
     var diffHeight = maxLineHeight - minLineHeight;
     for (int i = 0; i < 8; i++) {
       canvas.save();
-
       var newProgress = _progress - i * 22.5;
-      var beatAlpha = sin(newProgress * pi / 180).abs() * diffAlpha + minAlpha;
+      var sinProgress = sin(newProgress * pi / 180).abs();
+      var beatAlpha = sinProgress * diffAlpha + minAlpha;
       paint.color = Color.fromARGB(
-          beatAlpha.round(), ballColor.red, ballColor.green, ballColor.blue);
-      var scaleWidth =
-          sin(newProgress * pi / 180).abs() * diffWidth + minLineWidth;
-      var scaleHeight =
-          sin(newProgress * pi / 180).abs() * diffHeight + minLineHeight;
-      var point = _circleAt(size.width * .5, size.height * .5,
-          size.width * .5 - maxLineWidth, i * pi / 4);
+        beatAlpha.round(),
+        ballColor.red,
+        ballColor.green,
+        ballColor.blue,
+      );
+      var scaleWidth = sinProgress * diffWidth + minLineWidth;
+      var scaleHeight = sinProgress * diffHeight + minLineHeight;
+      var point = _circleAt(
+        size.width * .5,
+        size.height * .5,
+        size.width * .5 - maxLineWidth,
+        i * pi / 4,
+      );
 
       canvas.translate(point.dx, point.dy);
       canvas.rotate((90 + (i * 45)) * pi / 180);
       Rect rect = Rect.fromLTWH(
-          -scaleWidth * .5, -scaleHeight * .5, scaleWidth, scaleHeight);
+        -scaleWidth * .5,
+        -scaleHeight * .5,
+        scaleWidth,
+        scaleHeight,
+      );
       RRect rRect = RRect.fromRectAndRadius(
         rect,
         Radius.circular(4.0),

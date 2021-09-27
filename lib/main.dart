@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
     return Padding(
       padding: EdgeInsets.only(top: 10),
       child: ChantButton(
-        alignment: Alignment.centerLeft,
+        mainAxisAlignment: MainAxisAlignment.start,
         backgroundColor: ChantColor.gray1,
         fontColor: ChantColor.black,
         padding: EdgeInsets.only(left: 25),

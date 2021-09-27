@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:vant_flutter/package/loading/line_spin_fade_loader_indicator.dart';
 import 'package:vant_flutter/package/style/color.dart';
 
 class ChantLoading extends StatelessWidget {
@@ -7,19 +8,22 @@ class ChantLoading extends StatelessWidget {
     Key? key,
     this.color = ChantColor.gray5,
     this.type = LoadingType.circular,
-    this.size = 30,
+    this.size = 25,
     this.text = '',
     this.textSize = 14,
-    this.textColor = ChantColor.gray6,
+    textColor,
     this.vertical = false,
-  }) : super(key: key);
+  })  : textColor = textColor == null
+            ? (color == ChantColor.gray5 ? ChantColor.gray6 : color)
+            : textColor,
+        super(key: key);
 
   final Color color; // 颜色
   final LoadingType type; // 类型
   final double size; // 加载图标大小
   final String text; // 文字
   final double textSize; // 文字大小
-  final Color textColor; // 文字颜色
+  final Color? textColor; // 文字颜色
   final bool vertical; // 是否垂直排列图标和文字内容
 
   @override
@@ -30,7 +34,7 @@ class ChantLoading extends StatelessWidget {
         SizedBox(
           height: size,
           width: size,
-          child: _icon(),
+          child: type == LoadingType.circular ? _circular() : _spinner(),
         ),
         SizedBox(
           height: vertical ? 10 : 0,
@@ -41,11 +45,15 @@ class ChantLoading extends StatelessWidget {
     );
   }
 
-  Widget _icon() {
+  Widget _circular() {
     return CircularProgressIndicator(
       color: color,
       strokeWidth: 2,
     );
+  }
+
+  Widget _spinner() {
+    return LineSpinFadeLoaderIndicator(ballColor: color);
   }
 
   Widget _text() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:vant_flutter/package/loading/loading.dart';
 import 'package:vant_flutter/package/style/color.dart';
 import 'package:vant_flutter/package/style/size.dart';
 
@@ -12,7 +13,7 @@ class ChantButton extends StatefulWidget {
     this.size = ButtonSize.normal,
     this.height = ChantButtonSize.normalHeight,
     this.width = ChantButtonSize.normalWidth,
-    this.alignment = Alignment.center,
+    this.mainAxisAlignment = MainAxisAlignment.center,
     this.borderRadius = ChantBorderSize.borderRadiusSm,
     this.backgroundColor = ChantColor.white,
     this.gradient,
@@ -38,7 +39,7 @@ class ChantButton extends StatefulWidget {
   final ButtonSize size; // 尺寸
   final double height; // 高度
   final double width; // 宽度
-  final Alignment alignment; // 对齐方式
+  final MainAxisAlignment mainAxisAlignment; // 对齐方式
   final double borderRadius; // 圆角
   final Color backgroundColor; // 背景颜色
   final Gradient? gradient; // 渐变色
@@ -90,7 +91,6 @@ class _ChantButtonState extends State<ChantButton> {
       child: TextButton(
         style: _buttonStyle(),
         child: Container(
-          alignment: widget.alignment,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
               borderRadius,
@@ -241,10 +241,15 @@ class _ChantButtonState extends State<ChantButton> {
   // button
   Widget _button() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: widget.mainAxisAlignment,
       children: [
         _icon(),
-        Text(widget.text),
+        SizedBox(width: widget.text.isEmpty ? 0 : 5),
+        Container(
+          alignment: Alignment.center,
+          padding: widget.padding,
+          child: Text(widget.text),
+        ),
       ],
     );
   }
@@ -277,9 +282,4 @@ enum ButtonSize {
   normal,
   small,
   mini,
-}
-
-enum LoadingType {
-  circular,
-  spinner,
 }
