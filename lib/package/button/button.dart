@@ -256,7 +256,7 @@ class _ChantButtonState extends State<ChantButton> {
     return Image.asset(
       widget.icon,
       height: iconHeight,
-      width: iconHeight,
+      width: iconWidth,
     );
   }
 }
