@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        alignment: Alignment.topLeft,
         color: ChantColor.white,
         padding: EdgeInsets.only(
           top: 30,

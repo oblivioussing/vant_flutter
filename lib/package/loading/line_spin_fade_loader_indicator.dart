@@ -18,7 +18,7 @@ class LineSpinFadeLoaderIndicator extends StatefulWidget {
     this.maxLineHeight: 9.6,
     this.minBallAlpha: 77,
     this.maxBallAlpha: 255,
-    this.ballColor: Colors.white,
+    this.ballColor: Colors.red,
     this.duration: const Duration(milliseconds: 500),
   });
 
@@ -59,14 +59,15 @@ class _LineSpinFadeLoaderIndicatorState
         return CustomPaint(
           size: measureSize(),
           painter: _LineSpinFadeLoaderIndicatorPainter(
-              animationValue: animationValue,
-              minLineWidth: widget.minLineWidth,
-              maxLineWidth: widget.maxLineWidth,
-              minLineHeight: widget.minLineHeight,
-              maxLineHeight: widget.maxLineHeight,
-              minAlpha: widget.minBallAlpha,
-              maxAlpha: widget.maxBallAlpha,
-              ballColor: widget.ballColor),
+            animationValue: animationValue,
+            minLineWidth: widget.minLineWidth,
+            maxLineWidth: widget.maxLineWidth,
+            minLineHeight: widget.minLineHeight,
+            maxLineHeight: widget.maxLineHeight,
+            minAlpha: widget.minBallAlpha,
+            maxAlpha: widget.maxBallAlpha,
+            ballColor: widget.ballColor,
+          ),
         );
       },
     );
@@ -136,7 +137,10 @@ class _LineSpinFadeLoaderIndicatorPainter extends CustomPainter {
       canvas.rotate((90 + (i * 45)) * pi / 180);
       Rect rect = Rect.fromLTWH(
           -scaleWidth * .5, -scaleHeight * .5, scaleWidth, scaleHeight);
-      RRect rRect = RRect.fromRectAndRadius(rect, Radius.circular(4.0));
+      RRect rRect = RRect.fromRectAndRadius(
+        rect,
+        Radius.circular(4.0),
+      );
       canvas.drawRRect(rRect, paint);
 
       canvas.restore();
