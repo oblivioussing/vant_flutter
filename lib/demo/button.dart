@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vant_flutter/package/button/button.dart';
+import 'package:vant_flutter/package/loading/loading.dart';
 
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
 import 'package:vant_flutter/package/style/color.dart';
@@ -149,7 +150,37 @@ class _ButtonDemoState extends State<ButtonDemo> {
   // 加载状态
   Widget _loading() {
     return Row(
-      children: [],
+      children: [
+        ChantButton(
+          type: ButtonType.primary,
+          loading: true,
+          onPressed: () {
+            print('disabled');
+          },
+        ),
+        SizedBox(width: 13),
+        ChantButton(
+          text: '保存',
+          type: ButtonType.primary,
+          loading: true,
+          loadingType: LoadingType.spinner,
+          onPressed: () {
+            print('disabled');
+          },
+        ),
+        SizedBox(width: 13),
+        ChantButton(
+          text: '保存',
+          type: ButtonType.success,
+          loading: true,
+          loadingText: '努力加载中...',
+          plain: true,
+          width: 150,
+          onPressed: () {
+            print('disabled');
+          },
+        ),
+      ],
     );
   }
 

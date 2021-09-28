@@ -30,16 +30,14 @@ class ChantLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flex(
       direction: this.vertical ? Axis.vertical : Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           height: size,
           width: size,
           child: type == LoadingType.circular ? _circular() : _spinner(),
         ),
-        SizedBox(
-          height: vertical ? 10 : 0,
-          width: !vertical ? 10 : 0,
-        ),
+        _gap(),
         _text(),
       ],
     );
@@ -54,6 +52,16 @@ class ChantLoading extends StatelessWidget {
 
   Widget _spinner() {
     return LineSpinFadeLoaderIndicator(ballColor: color);
+  }
+
+  Widget _gap() {
+    if (text.isEmpty) {
+      return SizedBox.shrink();
+    }
+    return SizedBox(
+      height: vertical ? 10 : 0,
+      width: !vertical ? 10 : 0,
+    );
   }
 
   Widget _text() {

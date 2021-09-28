@@ -64,6 +64,7 @@ class ChantButton extends StatefulWidget {
 class _ChantButtonState extends State<ChantButton> {
   late Color backgroundColor; // 背景颜色
   late double borderRadius; // 圆角
+  late Color color; // 颜色
   late Color fontColor; // 文字颜色
   late double fontSize; // 文字大小
   late BorderSide borderSide; // 边框
@@ -116,7 +117,7 @@ class _ChantButtonState extends State<ChantButton> {
       ButtonType.primary: ChantColor.primary,
     };
     // 颜色
-    var color = colorMap[widget.type] as Color;
+    color = colorMap[widget.type] as Color;
     // 背景颜色
     if (widget.type == ButtonType.normal) {
       backgroundColor = widget.backgroundColor;
@@ -240,11 +241,13 @@ class _ChantButtonState extends State<ChantButton> {
 
   // button
   Widget _button() {
+    if (widget.loading) {
+      return _loading();
+    }
     return Row(
       mainAxisAlignment: widget.mainAxisAlignment,
       children: [
         _icon(),
-        SizedBox(width: widget.text.isEmpty ? 0 : 5),
         Container(
           alignment: Alignment.center,
           padding: widget.padding,
@@ -254,14 +257,39 @@ class _ChantButtonState extends State<ChantButton> {
     );
   }
 
+  Widget _loading() {
+    var loadingColor = ChantColor.white;
+    var size = 20.0;
+    if (widget.plain) {
+      loadingColor = color;
+    }
+    if (widget.size == ButtonSize.mini) {
+      size = 13;
+    }
+    return ChantLoading(
+      color: loadingColor,
+      size: size,
+      text: widget.loadingText,
+      textColor: loadingColor,
+      type: widget.loadingType,
+    );
+  }
+
   Widget _icon() {
     if (widget.icon.isEmpty) {
       return SizedBox.shrink();
     }
-    return Image.asset(
-      widget.icon,
-      height: iconHeight,
-      width: iconWidth,
+    return Row(
+      children: [
+        Image.asset(
+          widget.icon,
+          height: iconHeight,
+          width: iconWidth,
+        ),
+        SizedBox(
+          width: widget.text.isEmpty ? 0 : 5,
+        ),
+      ],
     );
   }
 }
