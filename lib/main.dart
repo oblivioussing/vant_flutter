@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vant_flutter/demo/button.dart';
+import 'package:vant_flutter/demo/cell.dart';
 import 'package:vant_flutter/demo/loading.dart';
 import 'package:vant_flutter/package/button/button.dart';
 import 'package:vant_flutter/package/style/color.dart';
@@ -102,6 +103,7 @@ class _HomeState extends State<Home> {
     var map = {
       'button': ButtonDemo(),
       'loading': LoadingDemo(),
+      'cell': CellDemo(),
     };
     var wdt = map[path] ?? Container();
     Navigator.push(
