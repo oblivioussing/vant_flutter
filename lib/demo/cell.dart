@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vant_flutter/package/cell/cell_group.dart';
 
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
 import 'package:vant_flutter/package/style/color.dart';
@@ -19,18 +20,21 @@ class _CellDemoState extends State<CellDemo> {
       body: SingleChildScrollView(
         padding: EdgeInsets.only(
           top: 0,
-          right: 10,
           bottom: 30,
-          left: 10,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _title('基础用法'),
+            _base(),
           ],
         ),
       ),
     );
+  }
+
+  Widget _base() {
+    return ChantCellGroup();
   }
 
   Widget _title(text) {
@@ -38,6 +42,7 @@ class _CellDemoState extends State<CellDemo> {
       padding: EdgeInsets.only(
         top: 30,
         bottom: 15,
+        left: 15,
       ),
       child: Text(
         text,
