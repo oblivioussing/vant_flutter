@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vant_flutter/package/cell/cell.dart';
 import 'package:vant_flutter/package/cell/cell_group.dart';
 
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
@@ -34,7 +35,11 @@ class _CellDemoState extends State<CellDemo> {
   }
 
   Widget _base() {
-    return ChantCellGroup();
+    return ChantCellGroup(
+      children: [
+        ChantCell(),
+      ],
+    );
   }
 
   Widget _title(text) {
