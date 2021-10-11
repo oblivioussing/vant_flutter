@@ -8,6 +8,11 @@ class ChantCell extends StatelessWidget {
     this.label = '',
     this.size = CellSize.normal,
     this.icon,
+    this.border = true,
+    this.clickable = false,
+    this.isLink = false,
+    this.required = false,
+    this.center = false,
   }) : super(key: key);
 
   final String title; // 左侧标题
@@ -15,10 +20,17 @@ class ChantCell extends StatelessWidget {
   final String label; // 标题下方的描述信息
   final CellSize size; // 单元格大小
   final String? icon; // 左侧图标
+  final bool border; // 是否显示内边框
+  final bool clickable; // 是否开启点击反馈
+  final bool isLink; // 是否展示右侧箭头并开启点击反馈
+  final bool required; // 是否显示表单必填星号
+  final bool center; // 是否使内容垂直居中
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [],
+    );
   }
 }
 
