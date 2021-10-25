@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vant_flutter/package/loading/loading.dart';
 import 'package:vant_flutter/package/style/color.dart';
 import 'package:vant_flutter/package/style/size.dart';
+import 'package:vant_flutter/package/widget/border.dart';
 
 class ChantButton extends StatefulWidget {
   ChantButton({
@@ -130,7 +131,7 @@ class _ChantButtonState extends State<ChantButton> {
     }
     // 普通按钮
     if (widget.type == ButtonType.normal) {
-      borderSide = BorderSide(color: ChantColor.gray3, width: 0.5);
+      borderSide = ChantBorder.side();
     } else {
       fontColor = ChantColor.white;
     }
@@ -142,10 +143,7 @@ class _ChantButtonState extends State<ChantButton> {
     }
     // 朴素按钮
     if (widget.plain) {
-      borderSide = BorderSide(
-        color: widget.color ?? color,
-        width: 0.5,
-      );
+      borderSide = ChantBorder.side(color: widget.color ?? color);
       backgroundColor = ChantColor.white;
       fontColor = widget.color ?? color;
     }

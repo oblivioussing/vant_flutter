@@ -28,6 +28,9 @@ class ChantCellGroup extends StatelessWidget {
           decoration: BoxDecoration(
             color: backgroundColor,
           ),
+          padding: EdgeInsets.only(
+            left: ChantPadding.md,
+          ),
           child: Column(
             children: children,
           ),
@@ -37,6 +40,9 @@ class ChantCellGroup extends StatelessWidget {
   }
 
   Widget _title() {
+    if (title == '') {
+      return SizedBox.shrink();
+    }
     return Padding(
       padding: EdgeInsets.only(
         left: ChantPadding.md,

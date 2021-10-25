@@ -37,7 +37,16 @@ class _CellDemoState extends State<CellDemo> {
   Widget _base() {
     return ChantCellGroup(
       children: [
-        ChantCell(),
+        ChantCell(
+          title: '单元格',
+          value: '内容',
+        ),
+        ChantCell(
+          title: '单元格',
+          value: '内容',
+          label: '描述信息',
+          last: true,
+        ),
       ],
     );
   }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:vant_flutter/package/style/color.dart';
+import 'package:vant_flutter/package/style/size.dart';
+import 'package:vant_flutter/package/widget/border.dart';
+
 class ChantCell extends StatelessWidget {
   const ChantCell({
     Key? key,
@@ -13,6 +17,7 @@ class ChantCell extends StatelessWidget {
     this.isLink = false,
     this.required = false,
     this.center = false,
+    this.last = false,
   }) : super(key: key);
 
   final String title; // 左侧标题
@@ -25,11 +30,43 @@ class ChantCell extends StatelessWidget {
   final bool isLink; // 是否展示右侧箭头并开启点击反馈
   final bool required; // 是否显示表单必填星号
   final bool center; // 是否使内容垂直居中
+  final bool last; // 是否为最后一个元素
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [],
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            border: last ? null : ChantBorder.bottom(),
+          ),
+          padding: EdgeInsets.only(
+            top: ChantPadding.cell,
+            right: ChantPadding.md,
+            bottom: ChantPadding.cell,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _title(),
+              _value(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _title() {
+    return Text(title);
+  }
+
+  Widget _value() {
+    return Text(
+      value,
+      style: TextStyle(
+        color: ChantColor.gray6,
+      ),
     );
   }
 }

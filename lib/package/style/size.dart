@@ -30,4 +30,5 @@ class ChantPadding {
   static const double md = base * 4;
   static const double lg = base * 6;
   static const double xl = base * 8;
+  static const double cell = 10;
 }
