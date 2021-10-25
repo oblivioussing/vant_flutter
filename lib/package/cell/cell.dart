@@ -34,31 +34,38 @@ class ChantCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            border: last ? null : ChantBorder.bottom(),
-          ),
-          padding: EdgeInsets.only(
-            top: ChantPadding.cell,
-            right: ChantPadding.md,
-            bottom: ChantPadding.cell,
-          ),
-          child: Row(
+    return Container(
+      decoration: BoxDecoration(
+        border: last ? null : ChantBorder.bottom(),
+      ),
+      padding: EdgeInsets.only(
+        top: ChantPadding.cell,
+        right: ChantPadding.md,
+        bottom: ChantPadding.cell,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _title(),
               _value(),
             ],
           ),
-        ),
-      ],
+          _label(),
+        ],
+      ),
     );
   }
 
   Widget _title() {
-    return Text(title);
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: ChantFontSize.md,
+      ),
+    );
   }
 
   Widget _value() {
@@ -66,6 +73,23 @@ class ChantCell extends StatelessWidget {
       value,
       style: TextStyle(
         color: ChantColor.gray6,
+        fontSize: ChantFontSize.md,
+      ),
+    );
+  }
+
+  Widget _label() {
+    if (label.isEmpty) {
+      return SizedBox.shrink();
+    }
+    return Container(
+      padding: EdgeInsets.only(top: 3),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: ChantColor.gray6,
+          fontSize: ChantFontSize.sm,
+        ),
       ),
     );
   }
