@@ -34,14 +34,19 @@ class ChantCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // cell上下间距
+    var cellVerticalPadding = ChantPadding.cell;
+    if (size == CellSize.large) {
+      cellVerticalPadding = ChantPadding.cellLarge;
+    }
     return Container(
       decoration: BoxDecoration(
         border: last ? null : ChantBorder.bottom(),
       ),
       padding: EdgeInsets.only(
-        top: ChantPadding.cell,
+        top: cellVerticalPadding,
         right: ChantPadding.md,
-        bottom: ChantPadding.cell,
+        bottom: cellVerticalPadding,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
