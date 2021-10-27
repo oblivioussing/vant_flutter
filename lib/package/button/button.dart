@@ -22,7 +22,6 @@ class ChantButton extends StatefulWidget {
     this.fontColor = ChantColor.white,
     this.fontSize = ChantFontSize.md,
     this.icon = '',
-    this.padding,
     this.plain = false,
     this.square = false,
     this.round = false,
@@ -48,7 +47,6 @@ class ChantButton extends StatefulWidget {
   final Color fontColor; // 文字颜色
   final double fontSize; // 文字大小
   final String icon; // 左侧图标
-  final EdgeInsets? padding; // 间距
   final bool plain; // 是否为朴素按钮
   final bool square; // 是否为方形按钮
   final bool round; // 是否为圆形按钮
@@ -255,7 +253,6 @@ class _ChantButtonState extends State<ChantButton> {
         _icon(),
         Container(
           alignment: Alignment.center,
-          padding: widget.padding,
           child: Text(widget.text),
         ),
       ],
