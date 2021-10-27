@@ -13,7 +13,7 @@ class ChantButton extends StatefulWidget {
     this.type = ButtonType.normal,
     this.size = ButtonSize.normal,
     this.height = ChantButtonSize.normalHeight,
-    this.width = ChantButtonSize.normalWidth,
+    this.width,
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.borderRadius = ChantBorderSize.borderRadiusSm,
     this.backgroundColor = ChantColor.white,
@@ -39,7 +39,7 @@ class ChantButton extends StatefulWidget {
   final ButtonType type; // 类型
   final ButtonSize size; // 尺寸
   final double height; // 高度
-  final double width; // 宽度
+  final double? width; // 宽度
   final MainAxisAlignment mainAxisAlignment; // 对齐方式
   final double borderRadius; // 圆角
   final Color backgroundColor; // 背景颜色
@@ -71,6 +71,7 @@ class _ChantButtonState extends State<ChantButton> {
   late BorderSide borderSide; // 边框
   late double? height; // 高度
   late double? width; // 宽度
+  late double padding = ChantPadding.buttonNormal; // 间距
   double iconHeight = 20; // icon高度
   double iconWidth = 20; // icon宽度
   bool active = false; // 是否处于点击状态
@@ -98,6 +99,10 @@ class _ChantButtonState extends State<ChantButton> {
               borderRadius,
             ),
             gradient: widget.gradient,
+          ),
+          padding: EdgeInsets.only(
+            left: padding,
+            right: padding,
           ),
           child: _button(),
         ),
@@ -160,12 +165,14 @@ class _ChantButtonState extends State<ChantButton> {
       fontSize = ChantFontSize.xs;
       height = ChantButtonSize.miniHeight;
       width = ChantButtonSize.miniWidth;
+      padding = ChantPadding.buttonMini;
     }
     // 小型按钮
     if (widget.size == ButtonSize.small) {
       fontSize = ChantFontSize.sm;
       height = ChantButtonSize.smallHeight;
       width = ChantButtonSize.smallWidth;
+      padding = ChantPadding.buttonSmall;
     }
     // 大号按钮
     if (widget.size == ButtonSize.large) {
@@ -217,7 +224,7 @@ class _ChantButtonState extends State<ChantButton> {
       }),
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       padding: MaterialStateProperty.all(
-        widget.padding ?? EdgeInsets.all(0),
+        EdgeInsets.all(0),
       ),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(

@@ -30,6 +30,11 @@ class ChantPadding {
   static const double md = base * 4;
   static const double lg = base * 6;
   static const double xl = base * 8;
+  // button
+  static const double buttonMini = base;
+  static const double buttonSmall = xs;
+  static const double buttonNormal = 15;
+  // cell
   static const double cell = 10;
   static const double cellLarge = md;
 }

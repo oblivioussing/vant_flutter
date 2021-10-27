@@ -16,8 +16,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: Home(),
-      home: CellDemo(),
+      home: Home(),
+      // home: ButtonDemo(),
     );
   }
 }
@@ -75,7 +75,6 @@ class _HomeState extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.start,
         backgroundColor: ChantColor.gray1,
         fontColor: ChantColor.black,
-        padding: EdgeInsets.only(left: 25),
         round: true,
         text: text,
         width: double.infinity,
