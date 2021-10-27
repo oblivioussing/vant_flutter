@@ -186,6 +186,9 @@ class _ChantButtonState extends State<ChantButton> {
 
   // button样式
   ButtonStyle _buttonStyle() {
+    if (widget.gradient != null) {
+      borderSide = ChantBorder.side(color: Colors.transparent);
+    }
     return ButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith((states) {
         var pressed = states.contains(MaterialState.pressed);
