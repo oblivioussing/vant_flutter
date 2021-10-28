@@ -24,7 +24,7 @@ class ChantCell extends StatelessWidget {
   final String value; // 右侧内容
   final String label; // 标题下方的描述信息
   final CellSize size; // 单元格大小
-  final String? icon; // 左侧图标
+  final IconData? icon; // 左侧图标
   final bool border; // 是否显示内边框
   final bool clickable; // 是否开启点击反馈
   final bool isLink; // 是否展示右侧箭头并开启点击反馈
@@ -65,11 +65,28 @@ class ChantCell extends StatelessWidget {
   }
 
   Widget _title() {
-    return Text(
-      title,
-      style: TextStyle(
-        fontSize: ChantFontSize.md,
-      ),
+    var iconWdt;
+    if (icon == null) {
+      iconWdt = SizedBox.shrink();
+    } else {
+      iconWdt = Padding(
+        padding: EdgeInsets.only(right: ChantPadding.base),
+        child: Icon(
+          icon,
+          size: 16,
+        ),
+      );
+    }
+    return Row(
+      children: [
+        iconWdt,
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: ChantFontSize.md,
+          ),
+        ),
+      ],
     );
   }
 
@@ -88,7 +105,7 @@ class ChantCell extends StatelessWidget {
       return SizedBox.shrink();
     }
     return Container(
-      padding: EdgeInsets.only(top: 3),
+      padding: EdgeInsets.only(top: ChantPadding.base),
       child: Text(
         label,
         style: TextStyle(

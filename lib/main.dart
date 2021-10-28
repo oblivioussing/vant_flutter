@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vant_flutter/demo/button.dart';
 import 'package:vant_flutter/demo/cell.dart';
+import 'package:vant_flutter/demo/icon.dart';
 import 'package:vant_flutter/demo/loading.dart';
 import 'package:vant_flutter/package/button/button.dart';
 import 'package:vant_flutter/package/style/color.dart';
@@ -17,7 +18,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: Home(),
-      home: ButtonDemo(),
+      home: IconDemo(),
     );
   }
 }
@@ -56,6 +57,9 @@ class _HomeState extends State<Home> {
         _title('基础组件'),
         _cellBtn('Button按钮', () {
           _router('button');
+        }),
+        _cellBtn('Icon图标', () {
+          _router('icon');
         }),
         _cellBtn('Cell单元格', () {
           _router('cell');
@@ -102,6 +106,7 @@ class _HomeState extends State<Home> {
   _router(String path) {
     var map = {
       'button': ButtonDemo(),
+      'icon': IconDemo(),
       'loading': LoadingDemo(),
       'cell': CellDemo(),
     };

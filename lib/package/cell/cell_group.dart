@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vant_flutter/package/cell/cell.dart';
 import 'package:vant_flutter/package/style/color.dart';
 import 'package:vant_flutter/package/style/size.dart';
+import 'package:vant_flutter/package/widget/border.dart';
 
 class ChantCellGroup extends StatelessWidget {
   const ChantCellGroup({
@@ -21,15 +22,30 @@ class ChantCellGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var borderRadius;
+    var margin;
+    // 圆角卡片风格
+    if (inset) {
+      margin = EdgeInsets.only(
+        left: ChantPadding.md,
+        right: ChantPadding.md,
+      );
+      borderRadius = ChantBorder.radius(ChantBorderSize.borderRadiusMd);
+    }
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _title(),
         Container(
           decoration: BoxDecoration(
             color: backgroundColor,
+            borderRadius: borderRadius,
           ),
+          margin: margin,
           padding: EdgeInsets.only(
             left: ChantPadding.md,
+            right: ChantPadding.md,
           ),
           child: Column(
             children: children,
@@ -46,7 +62,7 @@ class ChantCellGroup extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         left: ChantPadding.md,
-        top: ChantPadding.md,
+        top: ChantPadding.xs,
         bottom: ChantPadding.xs,
       ),
       child: Text(

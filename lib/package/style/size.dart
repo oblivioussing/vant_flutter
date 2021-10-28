@@ -36,5 +36,5 @@ class ChantPadding {
   static const double buttonNormal = 15;
   // cell
   static const double cell = 10;
-  static const double cellLarge = md;
+  static const double cellLarge = sm;
 }
