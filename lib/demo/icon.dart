@@ -3,6 +3,8 @@ import 'package:vant_flutter/package/icon/icon.dart';
 
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
 import 'package:vant_flutter/package/style/color.dart';
+import 'package:vant_flutter/package/style/size.dart';
+import 'package:vant_flutter/package/widget/border.dart';
 
 class IconDemo extends StatefulWidget {
   const IconDemo({Key? key}) : super(key: key);
@@ -12,36 +14,67 @@ class IconDemo extends StatefulWidget {
 }
 
 class _IconDemoState extends State<IconDemo> {
-  var _iconList = [
-    ChantIcon.delete,
-    ChantIcon.increase,
-    ChantIcon.close,
-    ChantIcon.down,
-    ChantIcon.upward,
-    ChantIcon.next,
-    ChantIcon.back,
-    ChantIcon.nickname,
-    ChantIcon.address,
-    ChantIcon.check_more,
-    ChantIcon.clock,
-    ChantIcon.search,
-    ChantIcon.loading,
-  ];
+  var _iconMap = {
+    'delete': ChantIcon.delete,
+    'increase': ChantIcon.increase,
+    'close': ChantIcon.close,
+    'down': ChantIcon.down,
+    'upward': ChantIcon.upward,
+    'next': ChantIcon.next,
+    'back': ChantIcon.back,
+    'nickname': ChantIcon.nickname,
+    'address': ChantIcon.address,
+    'check_more': ChantIcon.check_more,
+    'clock': ChantIcon.clock,
+    'search': ChantIcon.search,
+    'loading': ChantIcon.loading,
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NavBar(title: 'Icon'),
       backgroundColor: ChantColor.gray1,
-      body: GridView.builder(
-        itemCount: 13,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4, // 每行列数
+      body: Container(
+        decoration: BoxDecoration(
+          borderRadius: ChantBorder.radius(
+            ChantBorderSize.borderRadiusLg,
+          ),
+          color: ChantColor.white,
         ),
-        itemBuilder: (context, index) {
-          return Icon(_iconList[index]);
-        },
+        margin: EdgeInsets.all(20),
+        child: _grid(),
       ),
+    );
+  }
+
+  Widget _grid() {
+    return GridView.count(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      crossAxisCount: 4,
+      children: _gridList(),
+    );
+  }
+
+  List<Widget> _gridList() {
+    List<Widget> list = [];
+    _iconMap.forEach((key, value) {
+      list.add(
+        _gridItem(name: key, icon: value),
+      );
+    });
+    return list;
+  }
+
+  Widget _gridItem({name: String, icon: IconData}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon),
+        SizedBox(height: 5),
+        Text(name),
+      ],
     );
   }
 }
