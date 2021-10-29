@@ -21,7 +21,7 @@ class ChantButton extends StatefulWidget {
     this.color,
     this.fontColor = ChantColor.white,
     this.fontSize = ChantFontSize.md,
-    this.icon = '',
+    this.icon,
     this.plain = false,
     this.square = false,
     this.round = false,
@@ -46,7 +46,7 @@ class ChantButton extends StatefulWidget {
   final Color? color; // 按钮颜色
   final Color fontColor; // 文字颜色
   final double fontSize; // 文字大小
-  final String icon; // 左侧图标
+  final IconData? icon; // 左侧图标
   final bool plain; // 是否为朴素按钮
   final bool square; // 是否为方形按钮
   final bool round; // 是否为圆形按钮
@@ -70,8 +70,7 @@ class _ChantButtonState extends State<ChantButton> {
   late double? height; // 高度
   late double? width; // 宽度
   late double padding = ChantPadding.buttonNormal; // 间距
-  double iconHeight = 20; // icon高度
-  double iconWidth = 20; // icon宽度
+  double iconSize = 20; // icon尺寸
   bool active = false; // 是否处于点击状态
 
   @override
@@ -281,15 +280,14 @@ class _ChantButtonState extends State<ChantButton> {
   }
 
   Widget _icon() {
-    if (widget.icon.isEmpty) {
+    if (widget.icon == null) {
       return SizedBox.shrink();
     }
     return Row(
       children: [
-        Image.asset(
+        Icon(
           widget.icon,
-          height: iconHeight,
-          width: iconWidth,
+          size: iconSize,
         ),
         SizedBox(
           width: widget.text.isEmpty ? 0 : 5,

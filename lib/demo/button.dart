@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vant_flutter/package/button/button.dart';
+import 'package:vant_flutter/package/icon/icon.dart';
 import 'package:vant_flutter/package/loading/loading.dart';
 
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
@@ -210,14 +211,14 @@ class _ButtonDemoState extends State<ButtonDemo> {
     return Row(
       children: [
         ChantButton(
-          icon: 'image/ic_add_white.png',
+          icon: ChantIcon.increase,
           type: ButtonType.primary,
           onPressed: () {},
         ),
         SizedBox(width: 13),
         ChantButton(
           text: '按钮',
-          icon: 'image/ic_add_white.png',
+          icon: ChantIcon.increase,
           type: ButtonType.primary,
           onPressed: () {},
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vant_flutter/package/icon/icon.dart';
 import 'package:vant_flutter/package/style/color.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
@@ -29,15 +30,16 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   Widget _iconButton(
     context, {
     required onPressed,
-    required image,
+    required icon,
   }) {
     return IconButton(
       onPressed: onPressed,
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
-      icon: Image.asset(
-        image,
-        width: 20,
+      icon: Icon(
+        icon,
+        color: ChantColor.black,
+        size: 20,
       ),
     );
   }
@@ -48,7 +50,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
       onPressed: () {
         Navigator.maybePop(context);
       },
-      image: 'image/ic_back.png',
+      icon: ChantIcon.back,
     );
   }
 
@@ -68,7 +70,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
     return _iconButton(
       context,
       onPressed: () {},
-      image: 'image/ic_more.png',
+      icon: ChantIcon.check_more,
     );
   }
 }

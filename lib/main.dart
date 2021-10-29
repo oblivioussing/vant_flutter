@@ -18,7 +18,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: Home(),
-      home: IconDemo(),
+      home: ButtonDemo(),
     );
   }
 }
