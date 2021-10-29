@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vant_flutter/package/icon/icon.dart';
 
-import 'package:vant_flutter/package/loading/line_spin_fade_loader_indicator.dart';
 import 'package:vant_flutter/package/style/color.dart';
 
 class ChantLoading extends StatelessWidget {
@@ -32,11 +32,7 @@ class ChantLoading extends StatelessWidget {
       direction: this.vertical ? Axis.vertical : Axis.horizontal,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: size,
-          width: size,
-          child: type == LoadingType.circular ? _circular() : _spinner(),
-        ),
+        type == LoadingType.circular ? _circular() : _spinner(),
         _gap(),
         _text(),
       ],
@@ -44,14 +40,21 @@ class ChantLoading extends StatelessWidget {
   }
 
   Widget _circular() {
-    return CircularProgressIndicator(
-      color: color,
-      strokeWidth: 2,
+    return SizedBox(
+      height: size - 5,
+      width: size - 5,
+      child: CircularProgressIndicator(
+        color: color,
+        strokeWidth: 2,
+      ),
     );
   }
 
   Widget _spinner() {
-    return LineSpinFadeLoaderIndicator(ballColor: color);
+    return SpinnerLoading(
+      color: color,
+      size: size,
+    );
   }
 
   Widget _gap() {
@@ -73,6 +76,52 @@ class ChantLoading extends StatelessWidget {
       style: TextStyle(
         color: textColor,
         fontSize: textSize,
+      ),
+    );
+  }
+}
+
+class SpinnerLoading extends StatefulWidget {
+  SpinnerLoading({
+    @required this.color,
+    @required this.size,
+  });
+  final Color? color;
+  final double? size;
+
+  @override
+  _SpinnerLoadingState createState() => _SpinnerLoadingState();
+}
+
+class _SpinnerLoadingState extends State<SpinnerLoading>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller; // 动画控制器
+
+  @override
+  void initState() {
+    super.initState();
+    // 动画控制器
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+    _controller.forward();
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.reset();
+        _controller.forward();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      turns: _controller,
+      child: Icon(
+        ChantIcon.loading,
+        color: widget.color,
+        size: widget.size,
       ),
     );
   }

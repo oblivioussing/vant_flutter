@@ -71,7 +71,7 @@ class _ChantButtonState extends State<ChantButton> {
   late double? width; // 宽度
   late double padding = ChantPadding.buttonNormal; // 间距
   double iconSize = 20; // icon尺寸
-  bool active = false; // 是否处于点击状态
+  bool disabled = false; // 是否禁用点击
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +103,8 @@ class _ChantButtonState extends State<ChantButton> {
           ),
           child: _button(),
         ),
-        onPressed: widget.disabled ? null : widget.onPressed,
-        onLongPress: widget.disabled ? null : widget.onLongPress,
+        onPressed: disabled ? null : widget.onPressed,
+        onLongPress: disabled ? null : widget.onLongPress,
       ),
     );
   }
@@ -180,6 +180,10 @@ class _ChantButtonState extends State<ChantButton> {
     // 纯icon按钮
     if (widget.text.isEmpty) {
       width = (height ?? 0) + 10;
+    }
+    // 是否禁用点击
+    if (widget.disabled || widget.loading) {
+      disabled = true;
     }
   }
 

@@ -13,4 +13,5 @@ class ChantIcon {
   static const IconData check_more = IconData(0xe6dc, fontFamily: 'iconfont');
   static const IconData clock = IconData(0xe6dd, fontFamily: 'iconfont');
   static const IconData search = IconData(0xe6e1, fontFamily: 'iconfont');
+  static const IconData loading = IconData(0xe676, fontFamily: 'iconfont');
 }

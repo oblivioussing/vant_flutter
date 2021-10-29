@@ -25,6 +25,7 @@ class _IconDemoState extends State<IconDemo> {
     ChantIcon.check_more,
     ChantIcon.clock,
     ChantIcon.search,
+    ChantIcon.loading,
   ];
 
   @override
@@ -33,7 +34,7 @@ class _IconDemoState extends State<IconDemo> {
       appBar: NavBar(title: 'Icon'),
       backgroundColor: ChantColor.gray1,
       body: GridView.builder(
-        itemCount: 12,
+        itemCount: 13,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4, // 每行列数
         ),
