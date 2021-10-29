@@ -96,7 +96,7 @@ class _HomeState extends State<Home> {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           color: ChantColor.gray6,
         ),
       ),
