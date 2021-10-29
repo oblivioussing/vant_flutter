@@ -17,8 +17,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: Home(),
-      home: IconDemo(),
+      home: Home(),
+      // home: IconDemo(),
     );
   }
 }
@@ -55,17 +55,17 @@ class _HomeState extends State<Home> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _title('基础组件'),
-        _cellBtn('Button按钮', () {
+        _cellBtn('Button 按钮', () {
           _router('button');
         }),
-        _cellBtn('Icon图标', () {
-          _router('icon');
-        }),
-        _cellBtn('Cell单元格', () {
+        _cellBtn('Cell 单元格', () {
           _router('cell');
         }),
+        _cellBtn('Icon 图标', () {
+          _router('icon');
+        }),
         _title('反馈组件'),
-        _cellBtn('Loading加载', () {
+        _cellBtn('Loading 加载', () {
           _router('loading');
         }),
       ],

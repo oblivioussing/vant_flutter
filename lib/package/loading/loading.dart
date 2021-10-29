@@ -115,6 +115,12 @@ class _SpinnerLoadingState extends State<SpinnerLoading>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return RotationTransition(
       turns: _controller,
