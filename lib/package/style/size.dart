@@ -1,10 +1,7 @@
 class ChantButtonSize {
   static const double miniHeight = 24;
-  static const double miniWidth = 58;
   static const double smallHeight = 32;
-  static const double smallWidth = 66;
   static const double normalHeight = 44;
-  static const double normalWidth = 88;
   static const double largeHeight = 50;
   static const double largeWidth = double.infinity;
 }

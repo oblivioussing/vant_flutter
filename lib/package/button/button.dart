@@ -161,14 +161,12 @@ class _ChantButtonState extends State<ChantButton> {
     if (widget.size == ButtonSize.mini) {
       fontSize = ChantFontSize.xs;
       height = ChantButtonSize.miniHeight;
-      width = ChantButtonSize.miniWidth;
       padding = ChantPadding.buttonMini;
     }
     // 小型按钮
     if (widget.size == ButtonSize.small) {
       fontSize = ChantFontSize.sm;
       height = ChantButtonSize.smallHeight;
-      width = ChantButtonSize.smallWidth;
       padding = ChantPadding.buttonSmall;
     }
     // 大号按钮
