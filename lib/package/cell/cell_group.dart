@@ -43,10 +43,6 @@ class ChantCellGroup extends StatelessWidget {
             borderRadius: borderRadius,
           ),
           margin: margin,
-          padding: EdgeInsets.only(
-            left: ChantPadding.md,
-            right: ChantPadding.md,
-          ),
           child: Column(
             children: children,
           ),

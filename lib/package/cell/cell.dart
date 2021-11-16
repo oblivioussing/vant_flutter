@@ -9,7 +9,9 @@ class ChantCell extends StatelessWidget {
   const ChantCell({
     Key? key,
     this.title = '',
+    this.titleSlot,
     this.value = '',
+    this.valueSlot,
     this.label = '',
     this.size = CellSize.normal,
     this.icon,
@@ -24,7 +26,9 @@ class ChantCell extends StatelessWidget {
   }) : super(key: key);
 
   final String title; // 左侧标题
+  final Widget? titleSlot; // 标题slot
   final String value; // 右侧内容
+  final Widget? valueSlot; // 内容slot
   final String label; // 标题下方的描述信息
   final CellSize size; // 单元格大小
   final IconData? icon; // 左侧图标
@@ -39,6 +43,63 @@ class ChantCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return TextButton(
+      style: _buttonStyle(),
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: ChantPadding.md,
+          right: ChantPadding.md,
+        ),
+        child: _content(),
+      ),
+      onPressed: () {
+        if (onPressed != null) {
+          onPressed!();
+        }
+      },
+    );
+  }
+
+  ButtonStyle _buttonStyle() {
+    return ButtonStyle(
+      backgroundColor: MaterialStateProperty.resolveWith((states) {
+        var pressed = states.contains(MaterialState.pressed);
+        var backgroundColor = ChantColor.white;
+        // 点击
+        if (pressed && isLink) {
+          return ChantColor.gray3.withOpacity(
+            ChantColor.activeOpacity,
+          );
+        }
+        return backgroundColor;
+      }),
+      foregroundColor: MaterialStateProperty.resolveWith((states) {
+        var fontColor = ChantColor.black;
+        var pressed = states.contains(MaterialState.pressed);
+        if (pressed) {
+          return fontColor.withOpacity(ChantColor.activeOpacity);
+        }
+        return fontColor;
+      }),
+      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      padding: MaterialStateProperty.all(
+        EdgeInsets.all(0),
+      ),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            0,
+          ),
+        ),
+      ),
+      visualDensity: VisualDensity(
+        horizontal: VisualDensity.minimumDensity,
+        vertical: VisualDensity.minimumDensity,
+      ),
+    );
+  }
+
+  Widget _content() {
     // cell上下间距
     var cellVerticalPadding = ChantPadding.cell;
     if (size == CellSize.large) {
@@ -52,25 +113,46 @@ class ChantCell extends StatelessWidget {
         top: cellVerticalPadding,
         bottom: cellVerticalPadding,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: title == ''
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.spaceBetween,
+      child: _contentMain(),
+    );
+  }
+
+  Widget _contentMain() {
+    var alignment = MainAxisAlignment.spaceBetween;
+    if (title == '' && titleSlot == null) {
+      alignment = MainAxisAlignment.start;
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _title(),
-              _value(),
+              Row(
+                mainAxisAlignment: alignment,
+                children: [
+                  _title(),
+                  SizedBox(
+                    child: center ? null : _value(),
+                  )
+                ],
+              ),
+              _label(),
             ],
           ),
-          _label(),
-        ],
-      ),
+        ),
+        SizedBox(
+          child: center ? _value() : null,
+        )
+      ],
     );
   }
 
   Widget _title() {
+    if (titleSlot != null) {
+      return SizedBox(child: titleSlot);
+    }
     var iconWdt;
     if (icon == null) {
       iconWdt = SizedBox.shrink();
@@ -88,6 +170,7 @@ class ChantCell extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
+            color: ChantColor.black,
             fontSize: ChantFontSize.md,
           ),
         ),
@@ -96,6 +179,9 @@ class ChantCell extends StatelessWidget {
   }
 
   Widget _value() {
+    if (valueSlot != null) {
+      return SizedBox(child: valueSlot);
+    }
     var icon;
     if (isLink) {
       // 箭头方向
@@ -118,7 +204,9 @@ class ChantCell extends StatelessWidget {
         Text(
           value,
           style: TextStyle(
-            color: title == '' ? null : ChantColor.gray6,
+            color: title == '' && titleSlot == null
+                ? ChantColor.black
+                : ChantColor.gray6,
             fontSize: ChantFontSize.md,
           ),
         ),

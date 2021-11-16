@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vant_flutter/package/cell/cell.dart';
 import 'package:vant_flutter/package/cell/cell_group.dart';
+import 'package:vant_flutter/package/icon/icon.dart';
 
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
 import 'package:vant_flutter/package/style/color.dart';
@@ -38,6 +39,12 @@ class _CellDemoState extends State<CellDemo> {
             _onlyValue(),
             SizedBox(height: 15),
             _showArrow(),
+            SizedBox(height: 15),
+            _group(),
+            SizedBox(height: 15),
+            _slot(),
+            SizedBox(height: 15),
+            _vertical(),
           ],
         ),
       ),
@@ -145,12 +152,97 @@ class _CellDemoState extends State<CellDemo> {
           title: '单元格',
           value: '内容',
           isLink: true,
+          onPressed: () {
+            print('单元格');
+          },
         ),
         ChantCell(
           title: '单元格',
           value: '内容',
           isLink: true,
           arrowDirection: ArrowDirection.down,
+          last: true,
+        ),
+      ],
+    );
+  }
+
+  // 分组标题
+  Widget _group() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            left: 15,
+            top: 10,
+            bottom: 10,
+          ),
+          child: Text('分组标题'),
+        ),
+        ChantCellGroup(
+          title: '分组 1',
+          children: [
+            ChantCell(
+              title: '单元格',
+              value: '内容',
+              last: true,
+            ),
+          ],
+        ),
+        ChantCellGroup(
+          title: '分组 2',
+          children: [
+            ChantCell(
+              title: '单元格',
+              value: '内容',
+              last: true,
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  // 使用插槽
+  Widget _slot() {
+    return ChantCellGroup(
+      title: '使用插槽',
+      children: [
+        ChantCell(
+          titleSlot: Row(
+            children: [
+              Icon(ChantIcon.address),
+              Icon(ChantIcon.nickname),
+            ],
+          ),
+          value: '内容',
+          isLink: true,
+        ),
+        ChantCell(
+          title: '单元格',
+          valueSlot: Row(
+            children: [
+              Icon(ChantIcon.address),
+              Icon(ChantIcon.nickname),
+            ],
+          ),
+          last: true,
+        ),
+      ],
+    );
+  }
+
+  // 垂直居中
+  Widget _vertical() {
+    return ChantCellGroup(
+      title: '垂直居中',
+      children: [
+        ChantCell(
+          title: '单元格',
+          label: '描述信息',
+          value: '内容',
+          center: true,
           last: true,
         ),
       ],
