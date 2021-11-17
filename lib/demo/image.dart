@@ -29,6 +29,8 @@ class _ImageDemoState extends State<ImageDemo> {
             _base(),
             _title('填充模式'),
             _mode(),
+            _title('圆形图片'),
+            _round(),
           ],
         ),
       ),
@@ -90,12 +92,68 @@ class _ImageDemoState extends State<ImageDemo> {
     );
   }
 
+  // 圆形图片
+  Widget _round() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                _image(fit: BoxFit.contain),
+                _label('contain'),
+              ],
+            ),
+            Column(
+              children: [
+                _roundImage(fit: BoxFit.cover),
+                _label('cover'),
+              ],
+            ),
+            Column(
+              children: [
+                _roundImage(fit: BoxFit.fill),
+                _label('fill'),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                _roundImage(fit: BoxFit.none),
+                _label('none'),
+              ],
+            ),
+            Column(
+              children: [
+                _roundImage(fit: BoxFit.scaleDown),
+                _label('scaleDown'),
+              ],
+            ),
+            SizedBox(width: 100)
+          ],
+        ),
+      ],
+    );
+  }
+
   Widget _image({fit: BoxFit}) {
     return Image.asset(
       'image/cat.jpeg',
       fit: fit,
       height: 100,
       width: 100,
+    );
+  }
+
+  Widget _roundImage({fit: BoxFit}) {
+    return ClipOval(
+      child: _image(fit: fit),
     );
   }
 
