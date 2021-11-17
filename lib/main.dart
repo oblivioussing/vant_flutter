@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vant_flutter/demo/button.dart';
 import 'package:vant_flutter/demo/cell.dart';
 import 'package:vant_flutter/demo/icon.dart';
+import 'package:vant_flutter/demo/image.dart';
 import 'package:vant_flutter/demo/loading.dart';
 import 'package:vant_flutter/package/button/button.dart';
 import 'package:vant_flutter/package/style/color.dart';
@@ -17,8 +18,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
-      // home: CellDemo(),
+      // home: Home(),
+      home: ImageDemo(),
     );
   }
 }
@@ -64,6 +65,9 @@ class _HomeState extends State<Home> {
         _cellBtn('Icon 图标', () {
           _router('icon');
         }),
+        _cellBtn('Image 图片', () {
+          _router('image');
+        }),
         _title('反馈组件'),
         _cellBtn('Loading 加载', () {
           _router('loading');
@@ -106,9 +110,10 @@ class _HomeState extends State<Home> {
   _router(String path) {
     var map = {
       'button': ButtonDemo(),
-      'icon': IconDemo(),
-      'loading': LoadingDemo(),
       'cell': CellDemo(),
+      'icon': IconDemo(),
+      'image': ImageDemo(),
+      'loading': LoadingDemo(),
     };
     var wdt = map[path] ?? Container();
     Navigator.push(

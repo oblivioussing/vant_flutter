@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:vant_flutter/package/button/button.dart';
 import 'package:vant_flutter/package/icon/icon.dart';
 import 'package:vant_flutter/package/loading/loading.dart';
-
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
 import 'package:vant_flutter/package/style/color.dart';
 
