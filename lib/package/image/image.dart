@@ -28,7 +28,11 @@ class ChantImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: _image(
+        AssetImage('image/cat.jpeg'),
+      ),
+    );
   }
 
   Widget _image(ImageProvider image) {
