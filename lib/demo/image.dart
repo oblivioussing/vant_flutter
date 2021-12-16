@@ -31,6 +31,8 @@ class _ImageDemoState extends State<ImageDemo> {
             _mode(),
             _title('圆形图片'),
             _round(),
+            _title('加载中提示'),
+            _loading(),
           ],
         ),
       ),
@@ -101,7 +103,7 @@ class _ImageDemoState extends State<ImageDemo> {
           children: [
             Column(
               children: [
-                _image(fit: BoxFit.contain),
+                _roundImage(fit: BoxFit.contain),
                 _label('contain'),
               ],
             ),
@@ -132,6 +134,32 @@ class _ImageDemoState extends State<ImageDemo> {
             Column(
               children: [
                 _roundImage(fit: BoxFit.scaleDown),
+                _label('scaleDown'),
+              ],
+            ),
+            SizedBox(width: 100)
+          ],
+        ),
+      ],
+    );
+  }
+
+  // 加载中提示
+  Widget _loading() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                _image(fit: BoxFit.none),
+                _label('none'),
+              ],
+            ),
+            Column(
+              children: [
+                _image(fit: BoxFit.none),
                 _label('scaleDown'),
               ],
             ),
