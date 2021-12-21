@@ -70,7 +70,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
     return _iconButton(
       context,
       onPressed: () {},
-      icon: ChantIcon.check_more,
+      icon: ChantIcon.checkMore,
     );
   }
 }

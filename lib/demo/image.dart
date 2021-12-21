@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vant_flutter/package/image/image.dart';
 
 import 'package:vant_flutter/package/nav_bar/nav_bar.dart';
 import 'package:vant_flutter/package/style/color.dart';
@@ -146,33 +147,35 @@ class _ImageDemoState extends State<ImageDemo> {
 
   // 加载中提示
   Widget _loading() {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Column(
           children: [
-            Column(
-              children: [
-                _image(fit: BoxFit.none),
-                _label('none'),
-              ],
+            _image(
+              src: 'https://img.yzcdn.cn/vant/cat.jpeg',
+              fit: BoxFit.none,
             ),
-            Column(
-              children: [
-                _image(fit: BoxFit.none),
-                _label('scaleDown'),
-              ],
-            ),
-            SizedBox(width: 100)
+            _label('默认提示'),
           ],
         ),
+        Column(
+          children: [
+            _image(fit: BoxFit.none),
+            _label('自定义提示'),
+          ],
+        ),
+        SizedBox(width: 100),
       ],
     );
   }
 
-  Widget _image({fit: BoxFit}) {
-    return Image.asset(
-      'image/cat.jpeg',
+  Widget _image({
+    src = 'image/cat.jpeg',
+    fit: BoxFit,
+  }) {
+    return ChantImage(
+      src: src,
       fit: fit,
       height: 100,
       width: 100,

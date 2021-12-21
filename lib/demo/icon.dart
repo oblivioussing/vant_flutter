@@ -24,10 +24,12 @@ class _IconDemoState extends State<IconDemo> {
     'back': ChantIcon.back,
     'nickname': ChantIcon.nickname,
     'address': ChantIcon.address,
-    'check_more': ChantIcon.check_more,
+    'check_more': ChantIcon.checkMore,
     'clock': ChantIcon.clock,
     'search': ChantIcon.search,
     'loading': ChantIcon.loading,
+    'photo': ChantIcon.photo,
+    'photo_fail': ChantIcon.photoFail,
   };
 
   @override

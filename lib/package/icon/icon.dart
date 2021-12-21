@@ -10,8 +10,10 @@ class ChantIcon {
   static const IconData back = IconData(0xe6db, fontFamily: 'iconfont');
   static const IconData nickname = IconData(0xe6a0, fontFamily: 'iconfont');
   static const IconData address = IconData(0xe6a7, fontFamily: 'iconfont');
-  static const IconData check_more = IconData(0xe6dc, fontFamily: 'iconfont');
+  static const IconData checkMore = IconData(0xe6dc, fontFamily: 'iconfont');
   static const IconData clock = IconData(0xe6dd, fontFamily: 'iconfont');
   static const IconData search = IconData(0xe6e1, fontFamily: 'iconfont');
   static const IconData loading = IconData(0xe676, fontFamily: 'iconfont');
+  static const IconData photo = IconData(0xeb61, fontFamily: 'iconfont');
+  static const IconData photoFail = IconData(0xe6ae, fontFamily: 'iconfont');
 }

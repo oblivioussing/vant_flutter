@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ChantImage extends StatelessWidget {
   const ChantImage({
     Key? key,
-    this.src,
+    this.src = '',
     this.memory,
     this.fit,
     this.height,
@@ -28,9 +28,20 @@ class ChantImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var image;
+    if (src == '') {
+      image = MemoryImage(memory!);
+    } else {
+      var hasHttp = src?.indexOf('http') == 0;
+      if (hasHttp) {
+        image = NetworkImage(src!);
+      } else {
+        image = AssetImage(src!);
+      }
+    }
     return Container(
       child: _image(
-        AssetImage('image/cat.jpeg'),
+        image,
       ),
     );
   }
@@ -38,6 +49,7 @@ class ChantImage extends StatelessWidget {
   Widget _image(ImageProvider image) {
     return Image(
       image: image,
+      fit: fit,
       height: height,
       width: width,
     );
