@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ChantImage extends StatelessWidget {
   const ChantImage({
@@ -34,15 +35,19 @@ class ChantImage extends StatelessWidget {
     } else {
       var hasHttp = src?.indexOf('http') == 0;
       if (hasHttp) {
-        image = NetworkImage(src!);
+        image = _netWorkImage(src!);
       } else {
         image = AssetImage(src!);
       }
     }
-    return Container(
-      child: _image(
-        image,
-      ),
+    return _image(image);
+  }
+
+  Widget _netWorkImage(String src) {
+    return CachedNetworkImage(
+      imageUrl: src,
+      placeholder: (context, url) => CircularProgressIndicator(),
+      errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
 
