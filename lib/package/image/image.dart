@@ -29,23 +29,27 @@ class ChantImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var image;
+    // memory
     if (src == '') {
-      image = MemoryImage(memory!);
-    } else {
-      var hasHttp = src?.indexOf('http') == 0;
-      if (hasHttp) {
-        image = _netWorkImage(src!);
-      } else {
-        image = AssetImage(src!);
-      }
+      var image = MemoryImage(memory!);
+      return _image(image);
     }
-    return _image(image);
+    // network,asset
+    var hasHttp = src?.indexOf('http') == 0;
+    if (hasHttp) {
+      return _netWorkImage(src!);
+    } else {
+      var image = AssetImage(src!);
+      return _image(image);
+    }
   }
 
   Widget _netWorkImage(String src) {
     return CachedNetworkImage(
       imageUrl: src,
+      fit: fit,
+      height: height,
+      width: width,
       placeholder: (context, url) => CircularProgressIndicator(),
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
